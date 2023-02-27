@@ -1,15 +1,13 @@
 package za.flatrock.assessment.demo.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class CreateUserRequest {
+@Getter
+public class SearchCriteria {
 
     private String name;
     private String surname;
-
+    private String cellPhoneNumber;
 }

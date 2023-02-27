@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: FR Code Assessment
+  description: FR Code Assessment
+  version: 1.0.0
+  x-audience: internal-system
+  x-api-id: 78e624f8-f73e-4bbe-a918-bda261fd13ec
+paths:
+  /users:
+    post:
+      summary: Create a new user.
+      tags:
+        - User
+      operationId: create
+      requestBody:
+        required: true
+        description: Request to create a new user.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSuccessfulCreateUserResponse'
+
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+        '404':
+          description: The requested resource cannot be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+        '500':
+          description: There seems to be trouble processing your request, please try again
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    get:
+      summary: Search for a user.
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: surname
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: cellPhoneNumber
+          required: true
+          schema:
+            type: string
+      tags:
+        - User
+      operationId: search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSuccessfulDeleteUserResponse'
+
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+        '404':
+          description: The requested resource cannot be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+        '500':
+          description: There seems to be trouble processing your request, please try again
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /users/{1}:
+    delete:
+      summary: Delete a new user.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      tags:
+        - User
+      operationId: delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSuccessfulDeleteUserResponse'
+
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+        '404':
+          description: The requested resource cannot be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+        '500':
+          description: There seems to be trouble processing your request, please try again
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+components:
+  schemas:
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        cellPhoneNumber:
+          type: string
+
+    ApiSuccessfulCreateUserResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          type: object
+          $ref: '#/components/schemas/UserResponse'
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        surname:
+          type: string
+        cellPhoneNumber:
+          type: string
+
+    ApiSuccessfulDeleteUserResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          type: object
+          $ref: '#/components/schemas/DeleteUserResponse'
+
+    DeleteUserResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+
+    ApiSearchCriteriaResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
+
+    ApiErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string

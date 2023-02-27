@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "b698d2a6-f317-4e84-8021-aa2542c371b2",
+		"name": "FlatRock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11859172"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"bonny\",\n    \"surname\":\"Clyde\"\n}"
+				},
+				"url": {
+					"raw": "{{base-url}}/v1/users",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base-url}}/v1/users/2",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"v1",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
